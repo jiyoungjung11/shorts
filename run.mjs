@@ -1,0 +1,128 @@
+#!/usr/bin/env node
+/**
+ * 쇼츠 파이프라인
+ *
+ * 사용법:
+ *   node run.mjs "주제명"
+ *   node run.mjs "주제명" --scenario path/to/scenario.json  (기존 시나리오 사용)
+ *   node run.mjs "주제명" --from images                     (이미지부터 재시작)
+ *   node run.mjs "주제명" --from videos                     (영상부터 재시작)
+ *   node run.mjs "주제명" --from assemble                   (조립만 다시)
+ */
+
+import { mkdirSync, readFileSync, existsSync } from "fs";
+import { join, resolve } from "path";
+import { loadEnv, ROOT, slugify } from "./steps/utils.mjs";
+import { generateScenario } from "./steps/01_scenario.mjs";
+import { generateImages }   from "./steps/02_images.mjs";
+import { applyOverlays }    from "./steps/03_overlay.mjs";
+import { generateVideos }   from "./steps/04_videos.mjs";
+import { assembleVideo }    from "./steps/05_assemble.mjs";
+
+loadEnv();
+
+// ── 인자 파싱 ─────────────────────────────────────────────────
+const args = process.argv.slice(2);
+const topic = args.find((a) => !a.startsWith("--")) || "";
+
+if (!topic) {
+  console.error('사용법: node run.mjs "주제명"');
+  console.error('예시:   node run.mjs "경복궁 야경 쇼츠"');
+  process.exit(1);
+}
+
+const fromFlag  = args.indexOf("--from");
+const fromStep  = fromFlag !== -1 ? args[fromFlag + 1] : "scenario";
+
+const scenarioFlag = args.indexOf("--scenario");
+const scenarioFile = scenarioFlag !== -1 ? resolve(args[scenarioFlag + 1]) : null;
+
+// ── 경로 설정 ─────────────────────────────────────────────────
+const slug       = slugify(topic);
+const outDir     = join(ROOT, "output", slug);
+const imagesDir  = join(outDir, "images");
+const overlayDir = join(outDir, "images_overlay");
+const videosDir  = join(outDir, "videos");
+const scenarioPath = join(outDir, "scenario.json");
+const bgmPath    = join(ROOT, "bgm.mp3");
+const finalPath  = join(outDir, "final.mp4");
+
+for (const dir of [outDir, imagesDir, overlayDir, videosDir]) {
+  mkdirSync(dir, { recursive: true });
+}
+
+const STEPS = ["scenario", "images", "overlay", "videos", "assemble"];
+const startIdx = STEPS.indexOf(fromStep);
+if (startIdx === -1) {
+  console.error(`--from 값이 잘못됨: ${fromStep}`);
+  console.error(`가능한 값: ${STEPS.join(", ")}`);
+  process.exit(1);
+}
+
+function shouldRun(stepName) {
+  return STEPS.indexOf(stepName) >= startIdx;
+}
+
+// ── 메인 ─────────────────────────────────────────────────────
+async function main() {
+  console.log(`\n쇼츠 파이프라인 시작: "${topic}"`);
+  console.log(`출력 폴더: ${outDir}\n`);
+
+  // 1. 시나리오
+  let scenario;
+  if (!shouldRun("scenario") && existsSync(scenarioPath)) {
+    scenario = JSON.parse(readFileSync(scenarioPath, "utf-8"));
+    console.log(`[1/5] 시나리오 로드 (기존): ${scenario.cuts.length}컷`);
+  } else if (scenarioFile) {
+    scenario = JSON.parse(readFileSync(scenarioFile, "utf-8"));
+    console.log(`[1/5] 시나리오 로드 (파일): ${scenario.cuts.length}컷`);
+  } else {
+    console.log("[1/5] 시나리오 생성 중 (Claude API)...");
+    scenario = await generateScenario(topic, scenarioPath);
+    console.log(`  ${scenario.cuts.length}컷 완료`);
+  }
+  console.log();
+
+  // 2. 이미지
+  if (shouldRun("images")) {
+    console.log("[2/5] 이미지 생성 중 (Vertex AI Imagen 3)...");
+    await generateImages(scenario, imagesDir);
+    console.log();
+  } else {
+    console.log("[2/5] 이미지 건너뜀 (--from 설정)\n");
+  }
+
+  // 3. 오버레이
+  if (shouldRun("overlay")) {
+    console.log("[3/5] 텍스트 오버레이 적용 중 (Puppeteer)...");
+    await applyOverlays(scenario, imagesDir, overlayDir);
+    console.log();
+  } else {
+    console.log("[3/5] 오버레이 건너뜀 (--from 설정)\n");
+  }
+
+  // 4. 영상
+  if (shouldRun("videos")) {
+    console.log("[4/5] 영상 생성 중 (Kling API)...");
+    await generateVideos(scenario, overlayDir, videosDir);
+    console.log();
+  } else {
+    console.log("[4/5] 영상 건너뜀 (--from 설정)\n");
+  }
+
+  // 5. 조립
+  if (shouldRun("assemble")) {
+    console.log("[5/5] 최종 영상 조립 중 (ffmpeg)...");
+    assembleVideo(scenario, videosDir, bgmPath, finalPath);
+    console.log();
+  }
+
+  console.log(`완성: ${finalPath}`);
+  console.log(`SEO 제목: ${scenario.seo?.youtube_title || ""}`);
+  console.log(`해시태그: ${(scenario.seo?.hashtags || []).join(" ")}`);
+}
+
+main().catch((e) => {
+  console.error("\n오류:", e.message);
+  process.exit(1);
+});

@@ -1,0 +1,12 @@
+{
+  "name": "shorts-pipeline",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node run.mjs"
+  },
+  "dependencies": {
+    "google-auth-library": "^9.0.0",
+    "puppeteer": "^22.0.0"
+  }
+}
