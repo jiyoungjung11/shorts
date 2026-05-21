@@ -1,4 +1,6 @@
 .env
+*.json
+!package.json
 node_modules/
 output/
 *.mp4
