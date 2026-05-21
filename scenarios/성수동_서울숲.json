@@ -9,26 +9,26 @@
     {
       "cut_number": 1,
       "duration_seconds": 5,
-      "scene_description": "성수동 골목 전경 — 벽화, 카페, 인파가 가득한 활기찬 거리",
-      "narration": "Forget Gangnam. THIS is where Seoul truly comes alive — Seongsu-dong, the Brooklyn of Korea.",
+      "scene_description": "성수동 + 서울숲 동시 소개 — 도심 속 두 얼굴을 한 컷에 담은 오프닝",
+      "narration": "One neighborhood. Two worlds. Seongsu-dong — Seoul's hippest streets. And right next door, Seoul Forest — nature in the heart of the city.",
       "title_overlay": {
-        "main": "SEOUL'S SECRET",
-        "sub": "The neighborhood everyone's talking about"
+        "main": "SEONGSU-DONG",
+        "sub": "Seoul Forest · Seoul's must-visit destination"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic low-angle shot looking up at a towering weathered red brick industrial chimney in Seongsu-dong Seoul, deep orange sunset sky behind it, silhouettes of stylish young people walking below, warm golden backlight, strong architectural geometry, powerful contrast between old industrial heritage and vibrant modern life, no text no signs no writing --no cartoon anime blurry watermark",
-      "motion": "slow wide reveal pan from left to right along the street, gradually pushing in toward the crowd at golden hour"
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, sweeping high-angle wide shot of Seongsu-dong urban neighborhood at golden hour, red brick industrial buildings and trendy low-rise cafes filling the foreground, vast lush green canopy of Seoul Forest parkland seamlessly adjacent in the background, Han River sparkling beyond, city skyline on the horizon, warm golden light bathing the entire scene, people visible as tiny figures on streets below, breathtaking urban-nature contrast, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow wide aerial pull-back revealing the full scale of both Seongsu-dong streets and Seoul Forest side by side"
     },
     {
       "cut_number": 2,
       "duration_seconds": 5,
-      "scene_description": "낡은 공장 건물과 현대적 크리에이티브 스튜디오가 공존하는 성수동",
-      "narration": "Once Seoul's industrial heartland — shoe factories, printing presses, metalworks. Now? The most creative district in Asia.",
+      "scene_description": "성수동 주말 거리 — 트렌디한 카페 앞 줄 서는 인파, 플리마켓, 활기 넘치는 골목",
+      "narration": "Every weekend, thousands flock here — queuing for the city's best coffee, browsing pop-up markets, living their best Seoul life.",
       "title_overlay": {
-        "main": "REINVENTED",
-        "sub": "From factories to Seoul's creative capital"
+        "main": "THE BUZZ",
+        "sub": "Seoul's most energetic weekend destination"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic architectural split between crumbling red brick factory wall and sleek modern glass facade side by side in Seongsu-dong Seoul, raw exposed concrete and rusted metal pipes juxtaposed with clean minimalist interior, warm amber interior light glowing through large windows, no text no signs no writing --no cartoon anime blurry watermark",
-      "motion": "slow dolly from exterior brick wall tilt up to reveal the transformed creative space inside, lateral tracking shot along the building facade"
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, bustling weekend street scene in Seongsu-dong Seoul, large crowd of stylish young Koreans filling a wide alley, people queuing outside a popular cafe, outdoor pop-up market stalls with shoppers browsing, colorful fashion and trendy outfits, golden afternoon light, vibrant urban energy, shallow depth of field, dynamic crowd movement, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "lateral tracking shot moving through the crowd at street level, weaving through the energy of the busy market scene"
     },
     {
       "cut_number": 3,
@@ -93,14 +93,14 @@
     {
       "cut_number": 8,
       "duration_seconds": 5,
-      "scene_description": "뚝섬한강공원 — 자전거 타는 사람들과 한강 전경, 5분 거리",
-      "narration": "Five minutes on foot: Han River park, pop-up art galleries, and the famous Seongsu artisan market.",
+      "scene_description": "성수동 저녁 골목 — 퇴근 후 인파로 가득 찬 골목, 노천카페와 팝업스토어",
+      "narration": "After dark, Seongsu transforms. Office workers, tourists, and trendsetters pack every alley — the energy never stops.",
       "title_overlay": {
-        "main": "5 MIN WALK",
-        "sub": "Han River, art, markets — all nearby"
+        "main": "AFTER DARK",
+        "sub": "The neighborhood that never slows down"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Ttukseom Han River park in Seoul on a beautiful sunny day, cyclists and joggers on riverside path, picnicking families on lush green lawn, Han River wide and calm in foreground, Seoul Bridge and city skyline in background, pop-up market tents visible along the riverside, vibrant outdoor lifestyle, no text no signs no writing --no cartoon anime blurry watermark",
-      "motion": "wide establishing shot slow tilt down from bridge and skyline to riverside crowd, then lateral pan along the riverbank"
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, packed evening street in Seongsu-dong Seoul after sunset, dense crowd of young office workers and trendsetters filling a narrow alley, warm glowing outdoor cafe seating spilling onto pavement, people laughing and chatting at tables, string lights overhead, rich warm amber and golden tones, lively social atmosphere, motion blur suggesting movement and energy, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow push through the crowd at eye level, people moving around the camera, immersive street energy"
     },
     {
       "cut_number": 9,
