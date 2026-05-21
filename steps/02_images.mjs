@@ -33,22 +33,35 @@ async function getGoogleToken() {
 
 async function generateOneImage(prompt, token, projectId) {
   const apiPath = `/v1/projects/${projectId}/locations/${LOCATION}/publishers/google/models/${MODEL}:predict`;
-  const res = await httpsReq(
-    "POST",
-    `https://${API_HOST}${apiPath}`,
-    {
-      instances: [{ prompt }],
-      parameters: { sampleCount: 1, aspectRatio: "1:1", outputOptions: { mimeType: "image/png" } },
-    },
-    { Authorization: `Bearer ${token}` }
-  );
 
-  if (res.status !== 200) {
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const res = await httpsReq(
+      "POST",
+      `https://${API_HOST}${apiPath}`,
+      {
+        instances: [{ prompt }],
+        parameters: { sampleCount: 1, aspectRatio: "1:1", outputOptions: { mimeType: "image/png" } },
+      },
+      { Authorization: `Bearer ${token}` }
+    );
+
+    if (res.status === 200) {
+      const b64 = res.body?.predictions?.[0]?.bytesBase64Encoded;
+      if (!b64) throw new Error("이미지 데이터 없음");
+      return Buffer.from(b64, "base64");
+    }
+
+    if (res.status === 429) {
+      const wait = 60 * attempt;
+      console.log(`  할당량 초과, ${wait}초 후 재시도 (${attempt}/5)...`);
+      await new Promise((r) => setTimeout(r, wait * 1000));
+      continue;
+    }
+
     throw new Error(`Imagen API error ${res.status}: ${JSON.stringify(res.body).slice(0, 300)}`);
   }
-  const b64 = res.body?.predictions?.[0]?.bytesBase64Encoded;
-  if (!b64) throw new Error("이미지 데이터 없음");
-  return Buffer.from(b64, "base64");
+
+  throw new Error("Imagen API: 재시도 횟수 초과");
 }
 
 export async function generateImages(scenario, imagesDir) {
