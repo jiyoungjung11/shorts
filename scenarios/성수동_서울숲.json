@@ -123,7 +123,7 @@
         "main": "SAVE & VISIT",
         "sub": "Seoul's soul is waiting for you"
       },
-      "cinematic documentary photography, 4K quality, National Geographic aesthetic, magical blue hour night scene in Seongsu-dong Seoul, warm amber cafe window light glowing onto wet cobblestone alley, hundreds of bokeh string lights hanging overhead like stars, silhouettes of couples and friends walking, long exposure light trails from bicycle, deep indigo sky, romantic cinematic atmosphere, no text no signs no writing --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, magical blue hour night scene in Seongsu-dong Seoul, warm amber cafe window light glowing onto wet cobblestone alley, hundreds of bokeh string lights hanging overhead like stars, silhouettes of couples and friends walking, long exposure light trails from bicycle, deep indigo sky, romantic cinematic atmosphere, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow dolly push in along the glowing night alley toward the warm cafe lights at the end, gentle rack focus from foreground cobblestones to distant lights"
     }
   ]
