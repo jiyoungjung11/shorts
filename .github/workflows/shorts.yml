@@ -12,6 +12,9 @@ on:
         required: false
         type: string
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -27,16 +30,41 @@ jobs:
       - name: ffmpeg 설치
         run: sudo apt-get install -y ffmpeg
 
+      - name: Secrets 확인
+        run: |
+          echo "=== Secrets 존재 여부 확인 ==="
+          [ -n "${{ secrets.ANTHROPIC_API_KEY }}"   ] && echo "ANTHROPIC_API_KEY: OK"   || echo "ANTHROPIC_API_KEY: 없음!"
+          [ -n "${{ secrets.GOOGLE_SA_KEY_JSON }}"  ] && echo "GOOGLE_SA_KEY_JSON: OK"  || echo "GOOGLE_SA_KEY_JSON: 없음!"
+          [ -n "${{ secrets.GOOGLE_PROJECT_ID }}"   ] && echo "GOOGLE_PROJECT_ID: OK"   || echo "GOOGLE_PROJECT_ID: 없음!"
+          [ -n "${{ secrets.KLING_ACCESS_KEY }}"    ] && echo "KLING_ACCESS_KEY: OK"    || echo "KLING_ACCESS_KEY: 없음!"
+          [ -n "${{ secrets.KLING_SECRET_KEY }}"    ] && echo "KLING_SECRET_KEY: OK"    || echo "KLING_SECRET_KEY: 없음!"
+
       - name: Google 서비스 계정 키 저장
         run: |
           echo '${{ secrets.GOOGLE_SA_KEY_JSON }}' > /tmp/sa-key.json
+          echo "SA 키 파일 크기: $(wc -c < /tmp/sa-key.json) bytes"
+          python3 -c "import json,sys; json.load(open('/tmp/sa-key.json')); print('SA 키 JSON 파싱: OK')" || echo "SA 키 JSON 파싱 실패 — Settings > Secrets에서 GOOGLE_SA_KEY_JSON 값을 확인하세요"
 
       - name: 의존성 설치
         run: npm install
 
-      - name: Puppeteer 의존성 설치
+      - name: Puppeteer 브라우저 설치
+        run: npx puppeteer browsers install chrome
+
+      - name: 시나리오 파일 확인
         run: |
-          npx puppeteer browsers install chrome
+          SCENARIO_FILE="${{ github.event.inputs.scenario_file }}"
+          if [ -n "$SCENARIO_FILE" ]; then
+            if [ -f "scenarios/${SCENARIO_FILE}.json" ]; then
+              echo "시나리오 파일 발견: scenarios/${SCENARIO_FILE}.json"
+            else
+              echo "시나리오 파일 없음: scenarios/${SCENARIO_FILE}.json"
+              echo "사용 가능한 파일 목록:"
+              ls scenarios/ 2>/dev/null || echo "(scenarios/ 폴더 없음)"
+            fi
+          else
+            echo "scenario_file 미입력 — Claude API로 자동 생성"
+          fi
 
       - name: 쇼츠 파이프라인 실행
         env:
