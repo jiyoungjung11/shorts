@@ -1,10 +1,15 @@
-import { writeFileSync, readFileSync, existsSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
 import { join } from "path";
-import { httpsReq } from "./utils.mjs";
+import { httpsReq, sleep } from "./utils.mjs";
 
 const LOCATION = "us-central1";
 const MODEL    = "imagen-3.0-generate-002";
 const API_HOST = `${LOCATION}-aiplatform.googleapis.com`;
+
+// 429 시 재시도 간격 (ms): 60s, 90s, 120s
+const RETRY_DELAYS = [60_000, 90_000, 120_000];
+// 정상 요청 사이 간격 — 분당 쿼터 초과 방지
+const REQUEST_INTERVAL_MS = 12_000;
 
 async function getGoogleToken() {
   const saKeyPath = process.env.GOOGLE_SA_KEY_PATH;
@@ -23,22 +28,36 @@ async function getGoogleToken() {
 
 async function generateOneImage(prompt, token, projectId) {
   const apiPath = `/v1/projects/${projectId}/locations/${LOCATION}/publishers/google/models/${MODEL}:predict`;
-  const res = await httpsReq(
-    "POST",
-    `https://${API_HOST}${apiPath}`,
-    {
-      instances: [{ prompt }],
-      parameters: { sampleCount: 1, aspectRatio: "1:1", outputOptions: { mimeType: "image/png" } },
-    },
-    { Authorization: `Bearer ${token}` }
-  );
 
-  if (res.status !== 200) {
-    throw new Error(`Imagen API error ${res.status}: ${JSON.stringify(res.body).slice(0, 300)}`);
+  for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt++) {
+    const res = await httpsReq(
+      "POST",
+      `https://${API_HOST}${apiPath}`,
+      {
+        instances: [{ prompt }],
+        parameters: { sampleCount: 1, aspectRatio: "1:1", outputOptions: { mimeType: "image/png" } },
+      },
+      { Authorization: `Bearer ${token}` }
+    );
+
+    if (res.status === 429) {
+      if (attempt === RETRY_DELAYS.length) {
+        throw new Error(`Imagen API 쿼터 초과 — 재시도 ${RETRY_DELAYS.length}회 모두 실패`);
+      }
+      const wait = RETRY_DELAYS[attempt];
+      console.log(`  429 쿼터 초과 → ${wait / 1000}초 후 재시도 (${attempt + 1}/${RETRY_DELAYS.length})...`);
+      await sleep(wait);
+      continue;
+    }
+
+    if (res.status !== 200) {
+      throw new Error(`Imagen API error ${res.status}: ${JSON.stringify(res.body).slice(0, 300)}`);
+    }
+
+    const b64 = res.body?.predictions?.[0]?.bytesBase64Encoded;
+    if (!b64) throw new Error("이미지 데이터 없음");
+    return Buffer.from(b64, "base64");
   }
-  const b64 = res.body?.predictions?.[0]?.bytesBase64Encoded;
-  if (!b64) throw new Error("이미지 데이터 없음");
-  return Buffer.from(b64, "base64");
 }
 
 export async function generateImages(scenario, imagesDir) {
@@ -48,9 +67,10 @@ export async function generateImages(scenario, imagesDir) {
   const token = await getGoogleToken();
   const cuts = scenario.cuts || [];
 
-  for (const cut of cuts) {
-    const num     = cut.cut_number;
-    const padded  = String(num).padStart(2, "0");
+  for (let i = 0; i < cuts.length; i++) {
+    const cut    = cuts[i];
+    const num    = cut.cut_number;
+    const padded = String(num).padStart(2, "0");
     const outPath = join(imagesDir, `cut_${padded}.png`);
 
     if (existsSync(outPath)) {
@@ -63,5 +83,11 @@ export async function generateImages(scenario, imagesDir) {
     writeFileSync(outPath, imgBuf);
     const kb = Math.round(imgBuf.length / 1024);
     console.log(`  cut_${padded} 저장 (${kb} KB)`);
+
+    // 마지막 컷이 아니면 다음 요청 전에 대기
+    if (i < cuts.length - 1) {
+      console.log(`  다음 요청까지 ${REQUEST_INTERVAL_MS / 1000}초 대기...`);
+      await sleep(REQUEST_INTERVAL_MS);
+    }
   }
 }
