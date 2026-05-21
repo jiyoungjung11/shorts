@@ -15,7 +15,7 @@
         "main": "SEOUL'S SECRET",
         "sub": "The neighborhood everyone's talking about"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, wide establishing shot of Seongsu-dong street in Seoul, vibrant urban alley with converted brick factory buildings, colorful murals, trendy cafe signs in Korean, young fashionable crowds walking, golden hour warm light, shallow depth of field, dynamic energy --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic low-angle shot looking up at a towering weathered red brick industrial chimney in Seongsu-dong Seoul, deep orange sunset sky behind it, silhouettes of stylish young people walking below, warm golden backlight, strong architectural geometry, powerful contrast between old industrial heritage and vibrant modern life, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow wide reveal pan from left to right along the street, gradually pushing in toward the crowd at golden hour"
     },
     {
@@ -27,7 +27,7 @@
         "main": "REINVENTED",
         "sub": "From factories to Seoul's creative capital"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic contrast between old industrial brick factory facade and modern creative studio interior visible through glass windows in Seongsu-dong Seoul, exposed pipes and brick walls reimagined as chic workspace, designer furniture and art installations visible, warm interior light against weathered brick exterior, architectural transformation --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic architectural split between crumbling red brick factory wall and sleek modern glass facade side by side in Seongsu-dong Seoul, raw exposed concrete and rusted metal pipes juxtaposed with clean minimalist interior, warm amber interior light glowing through large windows, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow dolly from exterior brick wall tilt up to reveal the transformed creative space inside, lateral tracking shot along the building facade"
     },
     {
@@ -39,7 +39,7 @@
         "main": "SEOUL FOREST",
         "sub": "1.2M sqm of urban wilderness"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, sweeping aerial-perspective view of Seoul Forest urban park, vast green canopy of trees stretching across the frame, city skyscrapers of Seoul visible in the distant background beyond the treetops, families and couples walking on winding paths, lush autumn foliage in warm yellows and reds, crisp morning light --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, sweeping aerial-perspective view of Seoul Forest urban park, vast green canopy of trees stretching across the frame, city skyscrapers of Seoul visible in the distant background beyond the treetops, families and couples walking on winding paths, lush autumn foliage in warm yellows and reds, crisp morning light, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow tilt up from ground-level path through the trees revealing the vast green expanse with the Seoul skyline emerging in background"
     },
     {
@@ -51,7 +51,7 @@
         "main": "WILD SURPRISE",
         "sub": "Feed deer in the heart of Seoul"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of a gentle spotted deer eating from a tourist's hand inside Seoul Forest deer habitat, soft dappled sunlight through tree canopy, shallow depth of field with blurred green trees in background, tourists watching in amazement, intimate wildlife moment in urban park setting, warm natural light --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of a gentle spotted deer eating from a tourist's hand inside Seoul Forest deer habitat, soft dappled sunlight through tree canopy, shallow depth of field with blurred green trees in background, tourists watching in amazement, intimate wildlife moment in urban park setting, warm natural light, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow push in toward the deer feeding moment, shallow focus rack from tourist's hand to deer's face"
     },
     {
@@ -63,7 +63,7 @@
         "main": "HIDDEN CRAFT",
         "sub": "60 years of Korean shoemaking artistry"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of elderly Korean master shoemaker's weathered hands stitching premium leather shoe in small traditional workshop in Seongsu-dong, tools and leather pieces arranged on worn wooden workbench, warm tungsten workshop lighting, bokeh background of shoe lasts and leather rolls, craft and heritage atmosphere --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of elderly Korean master shoemaker's weathered hands stitching premium leather shoe in small traditional workshop in Seongsu-dong, tools and leather pieces arranged on worn wooden workbench, warm tungsten workshop lighting, bokeh background of shoe lasts and leather rolls, craft and heritage atmosphere, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "extreme close-up slow push in toward the craftsman's hands working the leather, tilt up to reveal his focused face"
     },
     {
@@ -75,7 +75,7 @@
         "main": "CAFÉ HEAVEN",
         "sub": "Seoul's most photogenic coffee scene"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, stylish rooftop cafe in Seongsu-dong Seoul with panoramic Han River view in background, beautifully plated specialty coffee on minimalist ceramic cup, fashionable young Koreans enjoying drinks, exposed brick walls and industrial chic decor, golden afternoon light, Seoul cityscape visible beyond the railing --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, stylish rooftop cafe in Seongsu-dong Seoul with panoramic Han River view in background, beautifully plated specialty coffee on minimalist ceramic cup, fashionable young Koreans enjoying drinks, exposed brick walls and industrial chic decor, golden afternoon light, Seoul cityscape visible beyond the railing, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "lateral tracking shot along the rooftop terrace edge, slow reveal of Han River panorama behind the cafe seating"
     },
     {
@@ -87,7 +87,7 @@
         "main": "FOOD PARADISE",
         "sub": "K-street food to gourmet in one block"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, vibrant food street in Seongsu-dong at dusk, street vendor serving steaming tteokbokki with neon signs glowing in background, juxtaposition of traditional Korean street food and modern gourmet restaurant entrance visible in same frame, people queuing, steam rising from food stalls, warm bokeh lights --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, extreme close-up of steaming Korean tteokbokki rice cakes in rich red spicy sauce bubbling in a large iron pan, vendor's hands using tongs, steam rising dramatically, shallow depth of field with warm bokeh street lights in background, glistening sauce texture, rich food photography, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow lateral tracking shot along the food street, gradually pushing in toward the steaming street food stall"
     },
     {
@@ -99,7 +99,7 @@
         "main": "5 MIN WALK",
         "sub": "Han River, art, markets — all nearby"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Ttukseom Han River park in Seoul on a beautiful sunny day, cyclists and joggers on riverside path, picnicking families on lush green lawn, Han River wide and calm in foreground, Seoul Bridge and city skyline in background, pop-up market tents visible along the riverside, vibrant outdoor lifestyle --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Ttukseom Han River park in Seoul on a beautiful sunny day, cyclists and joggers on riverside path, picnicking families on lush green lawn, Han River wide and calm in foreground, Seoul Bridge and city skyline in background, pop-up market tents visible along the riverside, vibrant outdoor lifestyle, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "wide establishing shot slow tilt down from bridge and skyline to riverside crowd, then lateral pan along the riverbank"
     },
     {
@@ -111,7 +111,7 @@
         "main": "TRAVEL TIPS",
         "sub": "Line 2 · Free entry · Open daily"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Seoul subway Line 2 green signage at Seongsu Station entrance, clear wayfinding signs in Korean and English, tourists with backpacks consulting map near station exit, clean modern urban infrastructure, morning light, helpful travel information atmosphere --no cartoon anime blurry watermark",
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, overhead bird's-eye view of Seoul subway station entrance plaza, streams of commuters and tourists flowing in and out like a river, clean geometric tiled ground patterns, soft morning light casting long shadows, urban rhythm and flow, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow push in toward the station entrance sign, tilt down to reveal tourists using the entrance"
     },
     {
@@ -123,7 +123,7 @@
         "main": "SAVE & VISIT",
         "sub": "Seoul's soul is waiting for you"
       },
-      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, magical night scene of Seongsu-dong Seoul, warm glowing cafe lights and neon signs reflecting on wet cobblestone alley, bokeh string lights overhead, silhouettes of happy people walking, romantic urban atmosphere, long exposure light trails from passing scooters, deep blue twilight sky above --no cartoon anime blurry watermark",
+      "cinematic documentary photography, 4K quality, National Geographic aesthetic, magical blue hour night scene in Seongsu-dong Seoul, warm amber cafe window light glowing onto wet cobblestone alley, hundreds of bokeh string lights hanging overhead like stars, silhouettes of couples and friends walking, long exposure light trails from bicycle, deep indigo sky, romantic cinematic atmosphere, no text no signs no writing --no cartoon anime blurry watermark",
       "motion": "slow dolly push in along the glowing night alley toward the warm cafe lights at the end, gentle rack focus from foreground cobblestones to distant lights"
     }
   ]
