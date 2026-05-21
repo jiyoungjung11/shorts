@@ -6,10 +6,10 @@ const LOCATION = "us-central1";
 const MODEL    = "imagen-3.0-generate-002";
 const API_HOST = `${LOCATION}-aiplatform.googleapis.com`;
 
-// 429 시 재시도 간격 (ms): 60s, 90s, 120s
-const RETRY_DELAYS = [60_000, 90_000, 120_000];
-// 정상 요청 사이 간격 — 분당 쿼터 초과 방지
-const REQUEST_INTERVAL_MS = 12_000;
+// 429 시 재시도 간격 (ms): 65s, 65s, 65s  (60s 쿼터 윈도우 + 여유)
+const RETRY_DELAYS = [65_000, 65_000, 65_000];
+// 정상 요청 사이 간격 — 5QPM 쿼터 기준 20s = 분당 3개 (안전 마진 확보)
+const REQUEST_INTERVAL_MS = 20_000;
 
 async function getGoogleToken() {
   const saKeyPath = process.env.GOOGLE_SA_KEY_PATH;
