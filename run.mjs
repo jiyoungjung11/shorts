@@ -40,6 +40,12 @@ const toStep  = toFlag !== -1 ? args[toFlag + 1] : "assemble";
 const scenarioFlag = args.indexOf("--scenario");
 const scenarioFile = scenarioFlag !== -1 ? resolve(args[scenarioFlag + 1]) : null;
 
+// --cut 1,3,5  →  특정 컷 번호만 처리 (미리보기용)
+const cutFlag   = args.indexOf("--cut");
+const cutFilter = cutFlag !== -1
+  ? new Set(args[cutFlag + 1].split(",").map(Number))
+  : null;
+
 // ── 경로 설정 ─────────────────────────────────────────────────
 const slug       = slugify(topic);
 const outDir     = join(ROOT, "output", slug);
@@ -93,10 +99,18 @@ async function main() {
   }
   console.log();
 
+  // --cut 필터 적용
+  const filteredScenario = cutFilter
+    ? { ...scenario, cuts: scenario.cuts.filter(c => cutFilter.has(c.cut_number)) }
+    : scenario;
+  if (cutFilter) {
+    console.log(`컷 필터: ${[...cutFilter].join(", ")}번만 처리\n`);
+  }
+
   // 2. 이미지
   if (shouldRun("images")) {
     console.log("[2/5] 이미지 생성 중 (Vertex AI Imagen 3)...");
-    await generateImages(scenario, imagesDir);
+    await generateImages(filteredScenario, imagesDir);
     console.log();
   } else {
     console.log("[2/5] 이미지 건너뜀 (--from 설정)\n");
@@ -105,7 +119,7 @@ async function main() {
   // 3. 오버레이
   if (shouldRun("overlay")) {
     console.log("[3/5] 텍스트 오버레이 적용 중 (Puppeteer)...");
-    await applyOverlays(scenario, imagesDir, overlayDir);
+    await applyOverlays(filteredScenario, imagesDir, overlayDir);
     console.log();
   } else {
     console.log("[3/5] 오버레이 건너뜀 (--from 설정)\n");
