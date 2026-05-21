@@ -2,9 +2,10 @@ import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join } from "path";
 import { httpsReq, downloadFile, makeKlingJwt, sleep } from "./utils.mjs";
 
-const KLING_BASE    = "https://api.klingai.com";
-const POLL_INTERVAL = 15_000;
-const MAX_WAIT      = 600_000; // 10분
+const KLING_BASE      = "https://api.klingai.com";
+const POLL_INTERVAL   = 15_000;
+const MAX_WAIT        = 600_000; // 10분
+const BATCH_SIZE      = 3;       // Kling 동시 작업 한도 이하로 유지
 
 async function submitTask(imgPath, motion) {
   const b64 = readFileSync(imgPath).toString("base64");
@@ -82,28 +83,33 @@ export async function generateVideos(scenario, overlayDir, videosDir) {
     return;
   }
 
-  // 2단계: 전체 작업 동시 제출
-  console.log(`  ${pending.length}개 작업 동시 제출 중...`);
-  const submitted = await Promise.all(
-    pending.map(async (cut) => {
+  // 2단계: BATCH_SIZE개씩 묶어 제출 → 완료 → 다음 배치
+  for (let i = 0; i < pending.length; i += BATCH_SIZE) {
+    const batch = pending.slice(i, i + BATCH_SIZE);
+    const batchNum = Math.floor(i / BATCH_SIZE) + 1;
+    const totalBatches = Math.ceil(pending.length / BATCH_SIZE);
+    console.log(`\n  [배치 ${batchNum}/${totalBatches}] ${batch.length}개 제출 중...`);
+
+    // 배치 내 작업 순차 제출 (제출 자체도 동시에 하면 429 발생)
+    const submitted = [];
+    for (const cut of batch) {
       const padded  = String(cut.cut_number).padStart(2, "0");
       const imgPath = join(overlayDir, `cut_${padded}.png`);
       const taskId  = await submitTask(imgPath, cut.motion || "slow cinematic pan");
-      console.log(`  cut_${padded} 제출 완료 → task: ${taskId}`);
-      return { cut, padded, taskId };
-    })
-  );
+      console.log(`    cut_${padded} 제출 완료 → task: ${taskId}`);
+      submitted.push({ padded, taskId, vidPath: join(videosDir, `cut_${padded}.mp4`) });
+    }
 
-  // 3단계: 전체 완료 병렬 대기 및 다운로드
-  console.log(`  ${submitted.length}개 영상 병렬 생성 중 (최대 10분)...`);
-  await Promise.all(
-    submitted.map(async ({ cut, padded, taskId }) => {
-      const vidPath = join(videosDir, `cut_${padded}.mp4`);
-      const videoUrl = await waitForTask(taskId, padded);
-      if (!videoUrl) throw new Error(`cut_${padded}: 영상 URL 없음`);
-      await downloadFile(videoUrl, vidPath);
-      const kb = Math.round(readFileSync(vidPath).length / 1024);
-      console.log(`  cut_${padded} 저장 완료 (${kb} KB)`);
-    })
-  );
+    // 배치 내 영상 완료 병렬 대기
+    console.log(`    ${submitted.length}개 생성 대기 중...`);
+    await Promise.all(
+      submitted.map(async ({ padded, taskId, vidPath }) => {
+        const videoUrl = await waitForTask(taskId, padded);
+        if (!videoUrl) throw new Error(`cut_${padded}: 영상 URL 없음`);
+        await downloadFile(videoUrl, vidPath);
+        const kb = Math.round(readFileSync(vidPath).length / 1024);
+        console.log(`    cut_${padded} 저장 완료 (${kb} KB)`);
+      })
+    );
+  }
 }
