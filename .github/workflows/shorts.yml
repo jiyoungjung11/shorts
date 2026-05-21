@@ -11,6 +11,14 @@ on:
         description: 'Claude와 대화로 확정한 시나리오 파일명 (예: 성수동_서울숲) — 비워두면 자동 생성'
         required: false
         type: string
+      mode:
+        description: '실행 모드'
+        required: true
+        type: choice
+        default: 'preview'
+        options:
+          - preview
+          - full
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -28,22 +36,12 @@ jobs:
           node-version: '20'
 
       - name: ffmpeg 설치
+        if: ${{ github.event.inputs.mode == 'full' }}
         run: sudo apt-get install -y ffmpeg
-
-      - name: Secrets 확인
-        run: |
-          echo "=== Secrets 존재 여부 확인 ==="
-          [ -n "${{ secrets.ANTHROPIC_API_KEY }}"   ] && echo "ANTHROPIC_API_KEY: OK"   || echo "ANTHROPIC_API_KEY: 없음!"
-          [ -n "${{ secrets.GOOGLE_SA_KEY_JSON }}"  ] && echo "GOOGLE_SA_KEY_JSON: OK"  || echo "GOOGLE_SA_KEY_JSON: 없음!"
-          [ -n "${{ secrets.GOOGLE_PROJECT_ID }}"   ] && echo "GOOGLE_PROJECT_ID: OK"   || echo "GOOGLE_PROJECT_ID: 없음!"
-          [ -n "${{ secrets.KLING_ACCESS_KEY }}"    ] && echo "KLING_ACCESS_KEY: OK"    || echo "KLING_ACCESS_KEY: 없음!"
-          [ -n "${{ secrets.KLING_SECRET_KEY }}"    ] && echo "KLING_SECRET_KEY: OK"    || echo "KLING_SECRET_KEY: 없음!"
 
       - name: Google 서비스 계정 키 저장
         run: |
           echo '${{ secrets.GOOGLE_SA_KEY_JSON }}' > /tmp/sa-key.json
-          echo "SA 키 파일 크기: $(wc -c < /tmp/sa-key.json) bytes"
-          python3 -c "import json,sys; json.load(open('/tmp/sa-key.json')); print('SA 키 JSON 파싱: OK')" || echo "SA 키 JSON 파싱 실패 — Settings > Secrets에서 GOOGLE_SA_KEY_JSON 값을 확인하세요"
 
       - name: 의존성 설치
         run: npm install
@@ -51,22 +49,23 @@ jobs:
       - name: Puppeteer 브라우저 설치
         run: npx puppeteer browsers install chrome
 
-      - name: 시나리오 파일 확인
+      - name: 이미지 미리보기 (시나리오 + 이미지 + 오버레이)
+        if: ${{ github.event.inputs.mode == 'preview' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_SA_KEY_PATH: /tmp/sa-key.json
+          GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+          FFMPEG_PATH: ffmpeg
         run: |
           SCENARIO_FILE="${{ github.event.inputs.scenario_file }}"
-          if [ -n "$SCENARIO_FILE" ]; then
-            if [ -f "scenarios/${SCENARIO_FILE}.json" ]; then
-              echo "시나리오 파일 발견: scenarios/${SCENARIO_FILE}.json"
-            else
-              echo "시나리오 파일 없음: scenarios/${SCENARIO_FILE}.json"
-              echo "사용 가능한 파일 목록:"
-              ls scenarios/ 2>/dev/null || echo "(scenarios/ 폴더 없음)"
-            fi
+          if [ -n "$SCENARIO_FILE" ] && [ -f "scenarios/${SCENARIO_FILE}.json" ]; then
+            node run.mjs "${{ github.event.inputs.topic }}" --scenario "scenarios/${SCENARIO_FILE}.json" --from scenario --to overlay
           else
-            echo "scenario_file 미입력 — Claude API로 자동 생성"
+            node run.mjs "${{ github.event.inputs.topic }}" --from scenario --to overlay
           fi
 
-      - name: 쇼츠 파이프라인 실행
+      - name: 전체 파이프라인 (시나리오 + 이미지 + 오버레이 + 영상 + 조립)
+        if: ${{ github.event.inputs.mode == 'full' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_SA_KEY_PATH: /tmp/sa-key.json
@@ -77,10 +76,8 @@ jobs:
         run: |
           SCENARIO_FILE="${{ github.event.inputs.scenario_file }}"
           if [ -n "$SCENARIO_FILE" ] && [ -f "scenarios/${SCENARIO_FILE}.json" ]; then
-            echo "Claude 대화 시나리오 사용: scenarios/${SCENARIO_FILE}.json"
             node run.mjs "${{ github.event.inputs.topic }}" --scenario "scenarios/${SCENARIO_FILE}.json"
           else
-            echo "Claude API로 시나리오 자동 생성"
             node run.mjs "${{ github.event.inputs.topic }}"
           fi
 
@@ -88,6 +85,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: shorts-${{ github.run_number }}
+          name: shorts-${{ github.run_number }}-${{ github.event.inputs.mode }}
           path: output/
           retention-days: 7

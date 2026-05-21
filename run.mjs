@@ -34,6 +34,9 @@ if (!topic) {
 const fromFlag  = args.indexOf("--from");
 const fromStep  = fromFlag !== -1 ? args[fromFlag + 1] : "scenario";
 
+const toFlag  = args.indexOf("--to");
+const toStep  = toFlag !== -1 ? args[toFlag + 1] : "assemble";
+
 const scenarioFlag = args.indexOf("--scenario");
 const scenarioFile = scenarioFlag !== -1 ? resolve(args[scenarioFlag + 1]) : null;
 
@@ -53,14 +56,21 @@ for (const dir of [outDir, imagesDir, overlayDir, videosDir]) {
 
 const STEPS = ["scenario", "images", "overlay", "videos", "assemble"];
 const startIdx = STEPS.indexOf(fromStep);
+const endIdx   = STEPS.indexOf(toStep);
 if (startIdx === -1) {
   console.error(`--from 값이 잘못됨: ${fromStep}`);
   console.error(`가능한 값: ${STEPS.join(", ")}`);
   process.exit(1);
 }
+if (endIdx === -1) {
+  console.error(`--to 값이 잘못됨: ${toStep}`);
+  console.error(`가능한 값: ${STEPS.join(", ")}`);
+  process.exit(1);
+}
 
 function shouldRun(stepName) {
-  return STEPS.indexOf(stepName) >= startIdx;
+  const idx = STEPS.indexOf(stepName);
+  return idx >= startIdx && idx <= endIdx;
 }
 
 // ── 메인 ─────────────────────────────────────────────────────
@@ -117,9 +127,13 @@ async function main() {
     console.log();
   }
 
-  console.log(`완성: ${finalPath}`);
-  console.log(`SEO 제목: ${scenario.seo?.youtube_title || ""}`);
-  console.log(`해시태그: ${(scenario.seo?.hashtags || []).join(" ")}`);
+  if (shouldRun("assemble")) {
+    console.log(`완성: ${finalPath}`);
+    console.log(`SEO 제목: ${scenario.seo?.youtube_title || ""}`);
+    console.log(`해시태그: ${(scenario.seo?.hashtags || []).join(" ")}`);
+  } else {
+    console.log(`미리보기 완료 — 오버레이 이미지: ${overlayDir}`);
+  }
 }
 
 main().catch((e) => {
