@@ -7,15 +7,25 @@ const MODEL    = "imagen-3.0-generate-002";
 const API_HOST = `${LOCATION}-aiplatform.googleapis.com`;
 
 async function getGoogleToken() {
-  const saKeyPath = process.env.GOOGLE_SA_KEY_PATH;
-  if (!saKeyPath) throw new Error("GOOGLE_SA_KEY_PATH가 .env에 없습니다.");
-  if (!existsSync(saKeyPath)) throw new Error(`서비스 계정 파일 없음: ${saKeyPath}`);
-
   const { GoogleAuth } = await import("google-auth-library");
-  const auth = new GoogleAuth({
-    keyFile: saKeyPath,
-    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
-  });
+
+  let authOpts;
+  if (process.env.GOOGLE_SA_KEY_JSON) {
+    authOpts = {
+      credentials: JSON.parse(process.env.GOOGLE_SA_KEY_JSON),
+      scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+    };
+  } else {
+    const saKeyPath = process.env.GOOGLE_SA_KEY_PATH;
+    if (!saKeyPath) throw new Error("GOOGLE_SA_KEY_PATH 또는 GOOGLE_SA_KEY_JSON이 없습니다.");
+    if (!existsSync(saKeyPath)) throw new Error(`서비스 계정 파일 없음: ${saKeyPath}`);
+    authOpts = {
+      keyFile: saKeyPath,
+      scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+    };
+  }
+
+  const auth = new GoogleAuth(authOpts);
   const client = await auth.getClient();
   const { token } = await client.getAccessToken();
   return token;

@@ -1,0 +1,57 @@
+name: 쇼츠 생성
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: '쇼츠 주제 (예: 경복궁 야경)'
+        required: true
+        type: string
+      from_step:
+        description: '시작 단계'
+        required: false
+        default: 'scenario'
+        type: choice
+        options:
+          - scenario
+          - images
+          - overlay
+          - videos
+          - assemble
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: ffmpeg 설치
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: 쇼츠 파이프라인 실행
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_SA_KEY_JSON: ${{ secrets.GOOGLE_SA_KEY_JSON }}
+          GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+          KLING_ACCESS_KEY: ${{ secrets.KLING_ACCESS_KEY }}
+          KLING_SECRET_KEY: ${{ secrets.KLING_SECRET_KEY }}
+          FFMPEG_PATH: ffmpeg
+        run: node run.mjs "${{ inputs.topic }}" --from ${{ inputs.from_step }}
+
+      - name: 결과물 업로드
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shorts-output
+          path: output/
+          retention-days: 7
