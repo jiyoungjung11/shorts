@@ -3,7 +3,7 @@ import { join } from "path";
 import { tmpdir } from "os";
 import { pathToFileURL } from "url";
 
-function buildHtml(imgB64, main, sub, cutNum, total) {
+function buildHtml(imgB64, main, sub, cutNum, total, korean = "") {
   const isCover = cutNum === 1 || cutNum === total;
 
   const coverStyle = `
@@ -15,10 +15,16 @@ function buildHtml(imgB64, main, sub, cutNum, total) {
   padding: 80px;
   text-align: center;
 }
+.korean {
+  font-size: 96px; font-weight: 900;
+  color: #fff; letter-spacing: 0.08em; line-height: 1.1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+}
 .main {
-  font-size: 80px; font-weight: 800;
-  color: #fff; letter-spacing: -0.02em; line-height: 1.15;
-  text-shadow: 0 3px 16px rgba(0,0,0,0.6);
+  font-size: 52px; font-weight: 600;
+  color: rgba(255,255,255,0.92); letter-spacing: 0.12em; line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  margin-top: 8px;
 }
 .sub {
   margin-top: 24px; font-size: 36px; font-weight: 500;
@@ -69,6 +75,7 @@ ${isCover ? coverStyle : topBarStyle}
 <div id="slide">
   <img class="bg" src="data:image/png;base64,${imgB64}" />
   <div class="overlay">
+    ${korean ? `<div class="korean">${korean}</div>` : ""}
     <div class="main">${main}</div>
     <div class="sub">${sub}</div>
   </div>
@@ -105,9 +112,10 @@ export async function applyOverlays(scenario, imagesDir, overlayDir) {
       }
 
       const imgB64   = readFileSync(imgPath).toString("base64");
-      const main     = cut.title_overlay?.main || "";
-      const sub      = cut.title_overlay?.sub  || "";
-      const html     = buildHtml(imgB64, main, sub, num, total);
+      const main     = cut.title_overlay?.main   || "";
+      const sub      = cut.title_overlay?.sub    || "";
+      const korean   = cut.title_overlay?.korean || "";
+      const html     = buildHtml(imgB64, main, sub, num, total, korean);
 
       const tmpFile = join(tmpdir(), `overlay_cut${padded}.html`);
       writeFileSync(tmpFile, html, "utf-8");

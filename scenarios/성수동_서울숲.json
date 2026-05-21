@@ -12,7 +12,8 @@
       "scene_description": "성수동 + 서울숲 동시 소개 — 도심 속 두 얼굴을 한 컷에 담은 오프닝",
       "narration": "One neighborhood. Two worlds. Seongsu-dong — Seoul's hippest streets. And right next door, Seoul Forest — nature in the heart of the city.",
       "title_overlay": {
-        "main": "SEONGSU-DONG",
+        "korean": "성수동",
+        "main": "Seongsu-dong",
         "sub": "Seoul Forest · Seoul's must-visit destination"
       },
       "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, sweeping high-angle wide shot of Seongsu-dong urban neighborhood at golden hour, red brick industrial buildings and trendy low-rise cafes filling the foreground, vast lush green canopy of Seoul Forest parkland seamlessly adjacent in the background, Han River sparkling beyond, city skyline on the horizon, warm golden light bathing the entire scene, people visible as tiny figures on streets below, breathtaking urban-nature contrast, no text no signs no writing --no cartoon anime blurry watermark",
