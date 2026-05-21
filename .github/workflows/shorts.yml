@@ -4,8 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: '쇼츠 주제 (예: 경복궁 야경)'
+        description: '쇼츠 주제 (예: 경복궁 야경) — scenario_file 미입력 시 Claude가 자동 생성'
         required: true
+        type: string
+      scenario_file:
+        description: 'Claude와 대화로 확정한 시나리오 파일명 (예: 성수동_서울숲) — 비워두면 자동 생성'
+        required: false
         type: string
 
 jobs:
@@ -42,7 +46,15 @@ jobs:
           KLING_ACCESS_KEY: ${{ secrets.KLING_ACCESS_KEY }}
           KLING_SECRET_KEY: ${{ secrets.KLING_SECRET_KEY }}
           FFMPEG_PATH: ffmpeg
-        run: node run.mjs "${{ github.event.inputs.topic }}"
+        run: |
+          SCENARIO_FILE="${{ github.event.inputs.scenario_file }}"
+          if [ -n "$SCENARIO_FILE" ] && [ -f "scenarios/${SCENARIO_FILE}.json" ]; then
+            echo "Claude 대화 시나리오 사용: scenarios/${SCENARIO_FILE}.json"
+            node run.mjs "${{ github.event.inputs.topic }}" --scenario "scenarios/${SCENARIO_FILE}.json"
+          else
+            echo "Claude API로 시나리오 자동 생성"
+            node run.mjs "${{ github.event.inputs.topic }}"
+          fi
 
       - name: 결과물 업로드
         uses: actions/upload-artifact@v4

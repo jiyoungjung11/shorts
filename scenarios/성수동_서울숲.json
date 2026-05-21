@@ -1,0 +1,130 @@
+{
+  "title": "성수동 서울숲 — 서울의 숨겨진 보석",
+  "topic": "성수동 서울숲",
+  "seo": {
+    "youtube_title": "Seoul's Coolest Neighborhood Nobody Talks About",
+    "hashtags": ["#Seoul", "#SeoulForest", "#Seongsu", "#KoreaTravel", "#VisitKorea", "#SeoulVlog", "#HiddenGem", "#KoreaHidden", "#서울숲", "#성수동"]
+  },
+  "cuts": [
+    {
+      "cut_number": 1,
+      "duration_seconds": 5,
+      "scene_description": "성수동 골목 전경 — 벽화, 카페, 인파가 가득한 활기찬 거리",
+      "narration": "Forget Gangnam. THIS is where Seoul truly comes alive — Seongsu-dong, the Brooklyn of Korea.",
+      "title_overlay": {
+        "main": "SEOUL'S SECRET",
+        "sub": "The neighborhood everyone's talking about"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, wide establishing shot of Seongsu-dong street in Seoul, vibrant urban alley with converted brick factory buildings, colorful murals, trendy cafe signs in Korean, young fashionable crowds walking, golden hour warm light, shallow depth of field, dynamic energy --no cartoon anime blurry watermark",
+      "motion": "slow wide reveal pan from left to right along the street, gradually pushing in toward the crowd at golden hour"
+    },
+    {
+      "cut_number": 2,
+      "duration_seconds": 5,
+      "scene_description": "낡은 공장 건물과 현대적 크리에이티브 스튜디오가 공존하는 성수동",
+      "narration": "Once Seoul's industrial heartland — shoe factories, printing presses, metalworks. Now? The most creative district in Asia.",
+      "title_overlay": {
+        "main": "REINVENTED",
+        "sub": "From factories to Seoul's creative capital"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, dramatic contrast between old industrial brick factory facade and modern creative studio interior visible through glass windows in Seongsu-dong Seoul, exposed pipes and brick walls reimagined as chic workspace, designer furniture and art installations visible, warm interior light against weathered brick exterior, architectural transformation --no cartoon anime blurry watermark",
+      "motion": "slow dolly from exterior brick wall tilt up to reveal the transformed creative space inside, lateral tracking shot along the building facade"
+    },
+    {
+      "cut_number": 3,
+      "duration_seconds": 5,
+      "scene_description": "서울숲 전경 — 도심 속 광활한 녹지와 한강 뷰",
+      "narration": "Right next door — Seoul Forest. 1.2 million square meters of pure nature, smack in the middle of the city.",
+      "title_overlay": {
+        "main": "SEOUL FOREST",
+        "sub": "1.2M sqm of urban wilderness"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, sweeping aerial-perspective view of Seoul Forest urban park, vast green canopy of trees stretching across the frame, city skyscrapers of Seoul visible in the distant background beyond the treetops, families and couples walking on winding paths, lush autumn foliage in warm yellows and reds, crisp morning light --no cartoon anime blurry watermark",
+      "motion": "slow tilt up from ground-level path through the trees revealing the vast green expanse with the Seoul skyline emerging in background"
+    },
+    {
+      "cut_number": 4,
+      "duration_seconds": 5,
+      "scene_description": "서울숲 사슴 방사장 — 관람객이 사슴에게 먹이를 주는 모습",
+      "narration": "The secret that shocks every tourist — you can feed DEER in the middle of Seoul. Yes, actual deer.",
+      "title_overlay": {
+        "main": "WILD SURPRISE",
+        "sub": "Feed deer in the heart of Seoul"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of a gentle spotted deer eating from a tourist's hand inside Seoul Forest deer habitat, soft dappled sunlight through tree canopy, shallow depth of field with blurred green trees in background, tourists watching in amazement, intimate wildlife moment in urban park setting, warm natural light --no cartoon anime blurry watermark",
+      "motion": "slow push in toward the deer feeding moment, shallow focus rack from tourist's hand to deer's face"
+    },
+    {
+      "cut_number": 5,
+      "duration_seconds": 5,
+      "scene_description": "성수동 수제화 장인 골목 — 손으로 가죽을 다듬는 60년 장인",
+      "narration": "Seongsu has a secret identity — Korea's shoemaking capital for 60 years. Watch masters craft leather by hand.",
+      "title_overlay": {
+        "main": "HIDDEN CRAFT",
+        "sub": "60 years of Korean shoemaking artistry"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of elderly Korean master shoemaker's weathered hands stitching premium leather shoe in small traditional workshop in Seongsu-dong, tools and leather pieces arranged on worn wooden workbench, warm tungsten workshop lighting, bokeh background of shoe lasts and leather rolls, craft and heritage atmosphere --no cartoon anime blurry watermark",
+      "motion": "extreme close-up slow push in toward the craftsman's hands working the leather, tilt up to reveal his focused face"
+    },
+    {
+      "cut_number": 6,
+      "duration_seconds": 5,
+      "scene_description": "성수동 루프탑 카페 — 한강과 서울 스카이라인이 보이는 뷰",
+      "narration": "Seoul's most Instagrammable cafes are ALL here. Rooftop views, Han River panoramas — coffee has never looked this good.",
+      "title_overlay": {
+        "main": "CAFÉ HEAVEN",
+        "sub": "Seoul's most photogenic coffee scene"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, stylish rooftop cafe in Seongsu-dong Seoul with panoramic Han River view in background, beautifully plated specialty coffee on minimalist ceramic cup, fashionable young Koreans enjoying drinks, exposed brick walls and industrial chic decor, golden afternoon light, Seoul cityscape visible beyond the railing --no cartoon anime blurry watermark",
+      "motion": "lateral tracking shot along the rooftop terrace edge, slow reveal of Han River panorama behind the cafe seating"
+    },
+    {
+      "cut_number": 7,
+      "duration_seconds": 5,
+      "scene_description": "성수동 맛집 거리 — 떡볶이 포장마차부터 한우 버거 레스토랑까지",
+      "narration": "Hungry? Seongsu's food scene ranges from K-street food to gourmet Korean beef burgers — all within one block.",
+      "title_overlay": {
+        "main": "FOOD PARADISE",
+        "sub": "K-street food to gourmet in one block"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, vibrant food street in Seongsu-dong at dusk, street vendor serving steaming tteokbokki with neon signs glowing in background, juxtaposition of traditional Korean street food and modern gourmet restaurant entrance visible in same frame, people queuing, steam rising from food stalls, warm bokeh lights --no cartoon anime blurry watermark",
+      "motion": "slow lateral tracking shot along the food street, gradually pushing in toward the steaming street food stall"
+    },
+    {
+      "cut_number": 8,
+      "duration_seconds": 5,
+      "scene_description": "뚝섬한강공원 — 자전거 타는 사람들과 한강 전경, 5분 거리",
+      "narration": "Five minutes on foot: Han River park, pop-up art galleries, and the famous Seongsu artisan market.",
+      "title_overlay": {
+        "main": "5 MIN WALK",
+        "sub": "Han River, art, markets — all nearby"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Ttukseom Han River park in Seoul on a beautiful sunny day, cyclists and joggers on riverside path, picnicking families on lush green lawn, Han River wide and calm in foreground, Seoul Bridge and city skyline in background, pop-up market tents visible along the riverside, vibrant outdoor lifestyle --no cartoon anime blurry watermark",
+      "motion": "wide establishing shot slow tilt down from bridge and skyline to riverside crowd, then lateral pan along the riverbank"
+    },
+    {
+      "cut_number": 9,
+      "duration_seconds": 5,
+      "scene_description": "지하철 2호선 성수역 입구 — 여행자를 위한 실용 정보",
+      "narration": "Line 2, Seongsu or Ttukseom Station. Seoul Forest is FREE. Best visited on weekday mornings.",
+      "title_overlay": {
+        "main": "TRAVEL TIPS",
+        "sub": "Line 2 · Free entry · Open daily"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, Seoul subway Line 2 green signage at Seongsu Station entrance, clear wayfinding signs in Korean and English, tourists with backpacks consulting map near station exit, clean modern urban infrastructure, morning light, helpful travel information atmosphere --no cartoon anime blurry watermark",
+      "motion": "slow push in toward the station entrance sign, tilt down to reveal tourists using the entrance"
+    },
+    {
+      "cut_number": 10,
+      "duration_seconds": 5,
+      "scene_description": "성수동 야경 — 골목 조명과 카페 불빛이 어우러진 밤 풍경 + CTA",
+      "narration": "Seongsu-dong isn't just a neighborhood — it's Seoul's soul. Save this. Share this. And come experience it yourself.",
+      "title_overlay": {
+        "main": "SAVE & VISIT",
+        "sub": "Seoul's soul is waiting for you"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, magical night scene of Seongsu-dong Seoul, warm glowing cafe lights and neon signs reflecting on wet cobblestone alley, bokeh string lights overhead, silhouettes of happy people walking, romantic urban atmosphere, long exposure light trails from passing scooters, deep blue twilight sky above --no cartoon anime blurry watermark",
+      "motion": "slow dolly push in along the glowing night alley toward the warm cafe lights at the end, gentle rack focus from foreground cobblestones to distant lights"
+    }
+  ]
+}
