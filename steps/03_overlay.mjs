@@ -48,14 +48,13 @@ function buildHtml(imgB64, main, sub, cutNum, total) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { width: 1080px; height: 1080px; overflow: hidden; background: #000; }
 #slide {
   width: 1080px; height: 1080px;
   position: relative; overflow: hidden;
-  font-family: 'Pretendard', -apple-system, sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
 }
 .bg { width: 100%; height: 100%; object-fit: cover; display: block; }
 ${isCover ? coverStyle : topBarStyle}
@@ -115,9 +114,8 @@ export async function applyOverlays(scenario, imagesDir, overlayDir) {
 
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1080 });
-      await page.goto(pathToFileURL(tmpFile).href, { waitUntil: "networkidle0" });
-      await page.evaluate(() => document.fonts.ready);
-      await new Promise((r) => setTimeout(r, 800));
+      await page.goto(pathToFileURL(tmpFile).href, { waitUntil: "domcontentloaded", timeout: 10000 });
+      await new Promise((r) => setTimeout(r, 300));
       await page.screenshot({ path: outPath, type: "png" });
       await page.close();
 
