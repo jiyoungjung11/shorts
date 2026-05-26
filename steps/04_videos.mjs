@@ -55,7 +55,7 @@ async function waitForTask(taskId, padded) {
   throw new Error(`cut_${padded} TIMEOUT (10분 초과)`);
 }
 
-export async function generateVideos(scenario, overlayDir, videosDir) {
+export async function generateVideos(scenario, imagesDir, videosDir) {
   const ak = process.env.KLING_ACCESS_KEY;
   const sk = process.env.KLING_SECRET_KEY;
   if (!ak || !sk) throw new Error("KLING_ACCESS_KEY / KLING_SECRET_KEY가 .env에 없습니다.");
@@ -70,9 +70,9 @@ export async function generateVideos(scenario, overlayDir, videosDir) {
       console.log(`  cut_${padded}: 영상 이미 존재, 건너뜀`);
       return false;
     }
-    const imgPath = join(overlayDir, `cut_${padded}.png`);
+    const imgPath = join(imagesDir, `cut_${padded}.png`);
     if (!existsSync(imgPath)) {
-      console.log(`  cut_${padded}: 오버레이 이미지 없음, 건너뜀`);
+      console.log(`  cut_${padded}: 원본 이미지 없음, 건너뜀`);
       return false;
     }
     return true;
@@ -94,7 +94,7 @@ export async function generateVideos(scenario, overlayDir, videosDir) {
     const submitted = [];
     for (const cut of batch) {
       const padded  = String(cut.cut_number).padStart(2, "0");
-      const imgPath = join(overlayDir, `cut_${padded}.png`);
+      const imgPath = join(imagesDir, `cut_${padded}.png`);
       const taskId  = await submitTask(imgPath, cut.motion || "slow cinematic pan");
       console.log(`    cut_${padded} 제출 완료 → task: ${taskId}`);
       submitted.push({ padded, taskId, vidPath: join(videosDir, `cut_${padded}.mp4`) });

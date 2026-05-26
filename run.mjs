@@ -12,6 +12,8 @@
 
 import { mkdirSync, readFileSync, existsSync } from "fs";
 import { join, resolve } from "path";
+import { createInterface } from "readline";
+import { execSync } from "child_process";
 import { loadEnv, ROOT, slugify } from "./steps/utils.mjs";
 import { generateScenario } from "./steps/01_scenario.mjs";
 import { generateImages }   from "./steps/02_images.mjs";
@@ -40,6 +42,9 @@ const toStep  = toFlag !== -1 ? args[toFlag + 1] : "assemble";
 const scenarioFlag = args.indexOf("--scenario");
 const scenarioFile = scenarioFlag !== -1 ? resolve(args[scenarioFlag + 1]) : null;
 
+const bgmFlag  = args.indexOf("--bgm");
+const customBgm = bgmFlag !== -1 ? resolve(args[bgmFlag + 1]) : null;
+
 // --cut 1,3,5  →  특정 컷 번호만 처리 (미리보기용)
 const cutFlag   = args.indexOf("--cut");
 const cutFilter = cutFlag !== -1
@@ -47,16 +52,17 @@ const cutFilter = cutFlag !== -1
   : null;
 
 // ── 경로 설정 ─────────────────────────────────────────────────
-const slug       = slugify(topic);
-const outDir     = join(ROOT, "output", slug);
-const imagesDir  = join(outDir, "images");
-const overlayDir = join(outDir, "images_overlay");
-const videosDir  = join(outDir, "videos");
-const scenarioPath = join(outDir, "scenario.json");
-const bgmPath    = join(ROOT, "bgm.mp3");
-const finalPath  = join(outDir, "final.mp4");
+const slug            = slugify(topic);
+const outDir          = join(ROOT, "output", slug);
+const imagesDir       = join(outDir, "images");
+const overlayDir      = join(outDir, "images_overlay");
+const textOverlayDir  = join(outDir, "images_text_overlay");
+const videosDir       = join(outDir, "videos");
+const scenarioPath    = join(outDir, "scenario.json");
+const bgmPath         = customBgm || join(ROOT, "bgm.mp3");
+const finalPath       = join(outDir, "final.mp4");
 
-for (const dir of [outDir, imagesDir, overlayDir, videosDir]) {
+for (const dir of [outDir, imagesDir, overlayDir, textOverlayDir, videosDir]) {
   mkdirSync(dir, { recursive: true });
 }
 
@@ -77,6 +83,13 @@ if (endIdx === -1) {
 function shouldRun(stepName) {
   const idx = STEPS.indexOf(stepName);
   return idx >= startIdx && idx <= endIdx;
+}
+
+async function waitForImageReview(dir) {
+  console.log(`\n이미지 생성 완료! 아래 폴더에서 확인하세요:`);
+  console.log(`  ${dir}`);
+  try { execSync(`explorer "${dir}"`, { windowsHide: true }); } catch (_) {}
+  console.log();
 }
 
 // ── 메인 ─────────────────────────────────────────────────────
@@ -111,7 +124,7 @@ async function main() {
   if (shouldRun("images")) {
     console.log("[2/5] 이미지 생성 중 (Vertex AI Imagen 3)...");
     await generateImages(filteredScenario, imagesDir);
-    console.log();
+    await waitForImageReview(imagesDir);
   } else {
     console.log("[2/5] 이미지 건너뜀 (--from 설정)\n");
   }
@@ -119,7 +132,7 @@ async function main() {
   // 3. 오버레이
   if (shouldRun("overlay")) {
     console.log("[3/5] 텍스트 오버레이 적용 중 (Puppeteer)...");
-    await applyOverlays(filteredScenario, imagesDir, overlayDir);
+    await applyOverlays(filteredScenario, imagesDir, overlayDir, textOverlayDir);
     console.log();
   } else {
     console.log("[3/5] 오버레이 건너뜀 (--from 설정)\n");
@@ -128,7 +141,7 @@ async function main() {
   // 4. 영상
   if (shouldRun("videos")) {
     console.log("[4/5] 영상 생성 중 (Kling API)...");
-    await generateVideos(scenario, overlayDir, videosDir);
+    await generateVideos(scenario, imagesDir, videosDir);
     console.log();
   } else {
     console.log("[4/5] 영상 건너뜀 (--from 설정)\n");
@@ -137,7 +150,7 @@ async function main() {
   // 5. 조립
   if (shouldRun("assemble")) {
     console.log("[5/5] 최종 영상 조립 중 (ffmpeg)...");
-    assembleVideo(scenario, videosDir, bgmPath, finalPath);
+    assembleVideo(scenario, videosDir, bgmPath, finalPath, textOverlayDir);
     console.log();
   }
 
