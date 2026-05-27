@@ -1,0 +1,132 @@
+{
+  "title": "수원화성 — 역사와 일상이 공존하는 성벽 길",
+  "topic": "수원화성",
+  "seo": {
+    "youtube_title": "The 220-Year-Old Giant Wall Surrounding a Korean City",
+    "hashtags": ["#SuwonHwaseong", "#Suwon", "#KoreaTravel", "#UNESCO", "#VisitKorea", "#SeoulDayTrip", "#KoreaHiddenGem", "#HistoryTravel", "#수원화성", "#수원여행"]
+  },
+  "cuts": [
+    {
+      "cut_number": 1,
+      "duration_seconds": 5,
+      "scene_description": "수원화성 성벽과 도시 전경 — 고대 성벽과 현대 빌딩이 공존하는 시각적 훅",
+      "narration": "Ever wanted to walk on a massive 220-year-old fortress wall that wraps around an entire modern city? Welcome to Suwon Hwaseong, a UNESCO treasure just one hour from Seoul.",
+      "title_overlay": {
+        "korean": "수원화성",
+        "main": "SECRET FORTRESS",
+        "sub": "A massive 220-year-old wall surrounding a city"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, majestic high-angle wide shot of Suwon Hwaseong Fortress wall winding gracefully along hills, beautifully preserved stone battlements, modern city skyscrapers and streets filling the background under a warm golden hour sky, soft glowing light bathing the scene, trees with vibrant green leaves dotted along the wall, peaceful co-existence of past and present, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow wide aerial pull-back and track, revealing the winding stone wall with the modern city skyline rising in the background"
+    },
+    {
+      "cut_number": 2,
+      "duration_seconds": 5,
+      "scene_description": "장안문(북문) 전경 — 웅장한 아치문과 옹성 구조",
+      "narration": "Built in 1796 by the visionary King Jeongjo, this UNESCO World Heritage site stretches nearly six kilometers. It represents the absolute pinnacle of Joseon Dynasty architectural science.",
+      "title_overlay": {
+        "main": "UNESCO LEGACY",
+        "sub": "Built in 1796, spanning 5.7 kilometers"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, low-angle grand view of Janganmun Gate of Suwon Hwaseong, a massive stone archway topped by a beautiful two-story traditional wooden pavilion, semi-circular brick guard wall (ongseong) enclosing the front, warm afternoon sun illuminating the intricate paintwork, historical grandeur, empty paved ground in foreground, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow tilt up from the massive stone foundation of the gate to the intricate colorful wooden pavilion on top"
+    },
+    {
+      "cut_number": 3,
+      "duration_seconds": 5,
+      "scene_description": "정약용의 거중기 모델 또는 성곽 축조 디테일 — 과학적 우수성 시각화",
+      "narration": "In my ten years guiding here, I'm always amazed by how it was built. The genius scholar Jeong Yak-yong invented the Geojunggi, a revolutionary heavy-lifting crane that made this miracle possible.",
+      "title_overlay": {
+        "main": "GENIUS ENGINEERING",
+        "sub": "Built with Joseon's revolutionary heavy crane"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up details of the historical Geojunggi wooden crane replica, thick ropes and heavy wooden pulleys lifting a large grey granite block, soft natural light highlighting the rough texture of the wood and stone, museum-like historical display setting, dramatic angle focusing on the physics of the pulleys, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "dolly in and slow pan across the wooden gears and ropes of the ancient lifting mechanism"
+    },
+    {
+      "cut_number": 4,
+      "duration_seconds": 5,
+      "scene_description": "성벽의 암문(비밀 통로) — 숲속에 숨겨진 듯한 벽돌 문",
+      "narration": "Most tourists walk right past this: the Secret Gates, or 'Ammun.' These hidden, narrow brick passages were ingeniously disguised in the landscape so soldiers could slip out undetected.",
+      "title_overlay": {
+        "main": "SECRET GATES",
+        "sub": "Hidden brick passages disguised in plain sight"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, low-angle shot of a narrow secret brick gateway (Ammun) arched into the dark stone fortress wall, surrounded by dense green ivy and overhanging tree branches, sunlight filtering through leaves creating dappled shadows on the stone pathway leading through the dark arch, mysterious historical atmosphere, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow push in (dolly in) along the stone path towards the dark opening of the secret gate"
+    },
+    {
+      "cut_number": 5,
+      "duration_seconds": 5,
+      "scene_description": "방화수류정과 화홍문 — 아름다운 연못과 누각, 수문",
+      "narration": "My absolute favorite spot is Bangasuryujeong Pavilion. Sitting right above the Hwahongmun water gate, this scenic masterpiece is a breathtaking highlight of Suwon's UNESCO heritage.",
+      "title_overlay": {
+        "main": "ROYAL PARADISE",
+        "sub": "The most beautiful pavilion in Korea"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, stunning eye-level shot of Bangasuryujeong Pavilion perched on a rocky cliff overlooking a serene round pond (Yongyeon), weeping willow branches framing the shot, reflecting pool effect, clear sky, late afternoon golden light reflecting on the water surface, traditional Korean garden beauty, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow lateral pan starting from the willow trees, revealing the pavilion and its perfect reflection in the calm pond"
+    },
+    {
+      "cut_number": 6,
+      "duration_seconds": 5,
+      "scene_description": "연무대(동장대) 활쏘기 체험 — 과녁을 향해 활을 당기는 외국인",
+      "narration": "Every time I bring guests here, they love the action. At Yeonmudae, the ancient military training ground, you can actually draw a traditional horn bow and shoot arrows like Joseon warriors.",
+      "title_overlay": {
+        "main": "ARCHERY TRIAL",
+        "sub": "Shoot traditional arrows like Joseon warriors"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, side-profile medium close-up of a foreign tourist tourist smiling while drawing a traditional Korean wooden bow (Gukgung) pointing towards distant targets, outdoor grassy training field of Yeonmudae, vibrant traditional Korean flags waving in the soft background, crisp focus on the arrow tip and bow string, warm bright sunlight, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow zoom in on the focused hands and bow string, capturing the tension of the drawn arrow"
+    },
+    {
+      "cut_number": 7,
+      "duration_seconds": 5,
+      "scene_description": "화성행궁 내부 전경 — 고즈넉한 행궁 마당과 전통 건물들",
+      "narration": "Inside the walls lies Hwaseong Haenggung, a temporary palace built for the King's emotional visits to his father's tomb. You can feel the deep, touching legacy of filial love in every courtyard.",
+      "title_overlay": {
+        "main": "FILIAL PALACE",
+        "sub": "A sanctuary built out of royal love and legacy"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, eye-level wide shot of a quiet inner courtyard of Hwaseong Haenggung Palace, elegant wooden pavilions with tiled roofs, empty sandy courtyard reflecting bright daylight, traditional red and yellow pillars, ancient pine tree standing proudly in the corner, solemn and peaceful historical mood, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow pan across the serene courtyard, showing the traditional tiled roofs against the clear blue sky"
+    },
+    {
+      "cut_number": 8,
+      "duration_seconds": 5,
+      "scene_description": "수원 통닭거리 — 지글지글 튀겨지는 닭고기와 활기찬 식당 분위기",
+      "narration": "After walking the wall, here is where I personally take all my guests: Suwon Tongdak Street. Just a 10-minute walk away, you'll taste the most legendary, ultra-crispy whole fried chicken.",
+      "title_overlay": {
+        "main": "TONGDAK STREET",
+        "sub": "Crispy Suwon fried chicken just 10m away"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, close-up of golden brown, crispy whole fried chicken being served steaming hot in a retro metal plate, light steam rising, crispy batter texture glistening, warm friendly restaurant background with out-of-focus patrons laughing, delicious food photography, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow push in (dolly in) towards the plate of hot fried chicken as a hand squeezes a lemon slice over it"
+    },
+    {
+      "cut_number": 9,
+      "duration_seconds": 5,
+      "scene_description": "노을 속 플라잉수원 열기구 — 성벽 너머로 날아오르는 열기구",
+      "narration": "Here is my ultimate guide tip: Skip the midday heat. Come at sunset to ride the 'Flying Suwon' hot air balloon, and watch the entire illuminated fortress wall turn into glowing gold.",
+      "title_overlay": {
+        "main": "GUIDE INSIDER",
+        "sub": "Ride the hot air balloon at sunset"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, breathtaking wide shot of a large colorful hot air balloon (Flying Suwon) floating high in the sky during a dramatic red and violet sunset, below is the winding Hwaseong fortress wall lit up with glowing golden lights, magical twilight atmosphere, city lights beginning to sparkle, awe-inspiring perspective, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow tilt up from the glowing golden fortress wall below to the floating hot air balloon high in the twilight sky"
+    },
+    {
+      "cut_number": 10,
+      "duration_seconds": 5,
+      "scene_description": "수원화성 창룡문 야경 — 황금빛 조명으로 빛나는 성벽과 작별 인사 + CTA",
+      "narration": "Suwon Hwaseong is where ancient history literally breathes alongside modern life. Save this guide for your next trip, share it with your travel partner, and let's explore Korea together!",
+      "title_overlay": {
+        "korean": "수원화성",
+        "main": "SAVE & VISIT",
+        "sub": "Save this guide for your next journey"
+      },
+      "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, spectacular night view of Changryongmun Gate of Suwon Hwaseong, the fortress wall illuminated with brilliant warm golden floodlights stretching into the dark indigo night, a few silhouetted couples walking hand-in-hand along the grass field next to the wall, starry night sky, magical and romantic ending scene, no text no signs no writing --no cartoon anime blurry watermark",
+      "motion": "slow wide aerial pull-back, letting the glowing golden walls stretch out into the dark, romantic night"
+    }
+  ]
+}

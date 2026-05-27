@@ -35,7 +35,7 @@ async function generateOneImage(prompt, token, projectId) {
       `https://${API_HOST}${apiPath}`,
       {
         instances: [{ prompt }],
-        parameters: { sampleCount: 1, aspectRatio: "1:1", outputOptions: { mimeType: "image/png" } },
+        parameters: { sampleCount: 1, aspectRatio: "9:16", outputOptions: { mimeType: "image/png" } },
       },
       { Authorization: `Bearer ${token}` }
     );

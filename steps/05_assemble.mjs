@@ -36,12 +36,12 @@ export function assembleVideo(scenario, videosDir, bgmPath, outPath, textOverlay
 
   const inputArgs      = inputs.map((f) => `-i "${f}"`).join(" ");
   const textInputArgs  = useText ? textPngs.map((f) => `-i "${f}"`).join(" ") : "";
-  const bgmArgs        = hasBgm ? `-i "${bgmPath}"` : "";
+  const bgmArgs        = hasBgm ? `-ss 12 -i "${bgmPath}"` : "";
 
   let filterComplex;
   if (useText) {
     const scaleFilters   = inputs.map((_, i) =>
-      `[${i}:v]trim=duration=5,setpts=PTS-STARTPTS,scale=1080:1080[vs${i}]`
+      `[${i}:v]trim=duration=5,setpts=PTS-STARTPTS,scale=1080:1920[vs${i}]`
     ).join(";");
     const overlayFilters = inputs.map((_, i) =>
       `[vs${i}][${N + i}:v]overlay=0:0:eof_action=repeat[v${i}]`
@@ -50,7 +50,7 @@ export function assembleVideo(scenario, videosDir, bgmPath, outPath, textOverlay
     filterComplex = `${scaleFilters};${overlayFilters};${vConcat}`;
   } else {
     const vFilters = inputs.map((_, i) =>
-      `[${i}:v]trim=duration=5,setpts=PTS-STARTPTS,scale=1080:1080[v${i}]`
+      `[${i}:v]trim=duration=5,setpts=PTS-STARTPTS,scale=1080:1920[v${i}]`
     ).join(";");
     const vConcat = inputs.map((_, i) => `[v${i}]`).join("") + `concat=n=${N}:v=1:a=0[vout]`;
     filterComplex = `${vFilters};${vConcat}`;

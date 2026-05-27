@@ -6,47 +6,50 @@ import { pathToFileURL } from "url";
 function buildTextOnlyHtml(main, sub, cutNum, total, korean = "") {
   const isCover = cutNum === 1 || cutNum === total;
 
+  const outline = `-2px -2px 0 rgba(0,0,0,0.85), 2px -2px 0 rgba(0,0,0,0.85), -2px 2px 0 rgba(0,0,0,0.85), 2px 2px 0 rgba(0,0,0,0.85), 0 4px 24px rgba(0,0,0,0.95)`;
+  const outlineSm = `-1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 3px 16px rgba(0,0,0,0.95)`;
+
   const coverStyle = `
 .overlay {
   position: absolute; inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.55);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 80px;
   text-align: center;
 }
 .korean {
-  font-size: 96px; font-weight: 900;
+  font-size: 128px; font-weight: 900;
   color: #fff; letter-spacing: 0.08em; line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  text-shadow: ${outline};
 }
 .main {
-  font-size: 52px; font-weight: 600;
-  color: rgba(255,255,255,0.92); letter-spacing: 0.12em; line-height: 1.2;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-  margin-top: 8px;
+  font-size: 76px; font-weight: 900;
+  color: #fff; letter-spacing: 0.10em; line-height: 1.2;
+  text-shadow: ${outline};
+  margin-top: 16px;
 }
 .sub {
-  margin-top: 24px; font-size: 36px; font-weight: 500;
-  color: rgba(255,255,255,0.9); letter-spacing: -0.01em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin-top: 32px; font-size: 46px; font-weight: 600;
+  color: #fff; letter-spacing: -0.01em; line-height: 1.55;
+  text-shadow: ${outlineSm};
 }`;
 
   const topBarStyle = `
 .overlay {
   position: absolute; top: 0; left: 0; right: 0;
-  padding: 60px 60px 80px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 70%, transparent 100%);
+  padding: 160px 72px 160px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.78) 60%, rgba(0,0,0,0.20) 88%, transparent 100%);
 }
 .main {
-  font-size: 72px; font-weight: 800;
+  font-size: 100px; font-weight: 900;
   color: #fff; letter-spacing: -0.02em; line-height: 1.15;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  text-shadow: ${outline};
 }
 .sub {
-  margin-top: 14px; font-size: 26px; font-weight: 500;
-  color: rgba(255,255,255,0.95); letter-spacing: -0.01em; line-height: 1.5;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-top: 22px; font-size: 42px; font-weight: 600;
+  color: #fff; letter-spacing: -0.01em; line-height: 1.55;
+  text-shadow: ${outlineSm};
 }`;
 
   return `<!DOCTYPE html>
@@ -67,16 +70,16 @@ function buildTextOnlyHtml(main, sub, cutNum, total, korean = "") {
   font-style: normal;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { width: 1080px; height: 1080px; overflow: hidden; background: transparent; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
 #slide {
-  width: 1080px; height: 1080px;
+  width: 1080px; height: 1920px;
   position: relative; overflow: hidden;
   font-family: 'MalgunGothic', 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
 }
 ${isCover ? coverStyle : topBarStyle}
 .counter {
-  position: absolute; bottom: 40px; right: 52px;
-  font-size: 26px; font-weight: 600;
+  position: absolute; bottom: 60px; right: 52px;
+  font-size: 28px; font-weight: 600;
   color: rgba(255,255,255,0.5); letter-spacing: 0.04em;
 }
 </style>
@@ -97,47 +100,50 @@ ${isCover ? coverStyle : topBarStyle}
 function buildHtml(imgB64, main, sub, cutNum, total, korean = "") {
   const isCover = cutNum === 1 || cutNum === total;
 
+  const outline = `-2px -2px 0 rgba(0,0,0,0.85), 2px -2px 0 rgba(0,0,0,0.85), -2px 2px 0 rgba(0,0,0,0.85), 2px 2px 0 rgba(0,0,0,0.85), 0 4px 24px rgba(0,0,0,0.95)`;
+  const outlineSm = `-1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 3px 16px rgba(0,0,0,0.95)`;
+
   const coverStyle = `
 .overlay {
   position: absolute; inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.55);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 80px;
   text-align: center;
 }
 .korean {
-  font-size: 96px; font-weight: 900;
+  font-size: 128px; font-weight: 900;
   color: #fff; letter-spacing: 0.08em; line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  text-shadow: ${outline};
 }
 .main {
-  font-size: 52px; font-weight: 600;
-  color: rgba(255,255,255,0.92); letter-spacing: 0.12em; line-height: 1.2;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-  margin-top: 8px;
+  font-size: 76px; font-weight: 900;
+  color: #fff; letter-spacing: 0.10em; line-height: 1.2;
+  text-shadow: ${outline};
+  margin-top: 16px;
 }
 .sub {
-  margin-top: 24px; font-size: 36px; font-weight: 500;
-  color: rgba(255,255,255,0.9); letter-spacing: -0.01em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin-top: 32px; font-size: 46px; font-weight: 600;
+  color: #fff; letter-spacing: -0.01em; line-height: 1.55;
+  text-shadow: ${outlineSm};
 }`;
 
   const topBarStyle = `
 .overlay {
   position: absolute; top: 0; left: 0; right: 0;
-  padding: 60px 60px 80px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 70%, transparent 100%);
+  padding: 160px 72px 160px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.78) 60%, rgba(0,0,0,0.20) 88%, transparent 100%);
 }
 .main {
-  font-size: 72px; font-weight: 800;
+  font-size: 100px; font-weight: 900;
   color: #fff; letter-spacing: -0.02em; line-height: 1.15;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  text-shadow: ${outline};
 }
 .sub {
-  margin-top: 14px; font-size: 26px; font-weight: 500;
-  color: rgba(255,255,255,0.95); letter-spacing: -0.01em; line-height: 1.5;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-top: 22px; font-size: 42px; font-weight: 600;
+  color: #fff; letter-spacing: -0.01em; line-height: 1.55;
+  text-shadow: ${outlineSm};
 }`;
 
   return `<!DOCTYPE html>
@@ -158,17 +164,17 @@ function buildHtml(imgB64, main, sub, cutNum, total, korean = "") {
   font-style: normal;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { width: 1080px; height: 1080px; overflow: hidden; background: #000; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
 #slide {
-  width: 1080px; height: 1080px;
+  width: 1080px; height: 1920px;
   position: relative; overflow: hidden;
   font-family: 'MalgunGothic', 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
 }
 .bg { width: 100%; height: 100%; object-fit: cover; display: block; }
 ${isCover ? coverStyle : topBarStyle}
 .counter {
-  position: absolute; bottom: 40px; right: 52px;
-  font-size: 26px; font-weight: 600;
+  position: absolute; bottom: 60px; right: 52px;
+  font-size: 28px; font-weight: 600;
   color: rgba(255,255,255,0.5); letter-spacing: 0.04em;
 }
 </style>
@@ -231,7 +237,7 @@ export async function applyOverlays(scenario, imagesDir, overlayDir, textOverlay
         writeFileSync(tmpFile, html, "utf-8");
 
         const page = await browser.newPage();
-        await page.setViewport({ width: 1080, height: 1080 });
+        await page.setViewport({ width: 1080, height: 1920 });
         await page.goto(pathToFileURL(tmpFile).href, { waitUntil: "networkidle0", timeout: 15000 });
         await new Promise((r) => setTimeout(r, 800));
         await page.screenshot({ path: outPath, type: "png" });
@@ -247,10 +253,10 @@ export async function applyOverlays(scenario, imagesDir, overlayDir, textOverlay
         writeFileSync(tmpTextFile, textHtml, "utf-8");
 
         const page2 = await browser.newPage();
-        await page2.setViewport({ width: 1080, height: 1080 });
+        await page2.setViewport({ width: 1080, height: 1920 });
         await page2.goto(pathToFileURL(tmpTextFile).href, { waitUntil: "networkidle0", timeout: 15000 });
         await new Promise((r) => setTimeout(r, 800));
-        await page2.screenshot({ path: textOutPath, type: "png", omitBackground: true });
+        await page2.screenshot({ path: textOutPath, type: "png", omitBackground: true, clip: { x: 0, y: 0, width: 1080, height: 1920 } });
         await page2.close();
         const kb2 = Math.round(readFileSync(textOutPath).length / 1024);
         console.log(`  cut_${padded} 텍스트 오버레이 저장 (${kb2} KB)`);
