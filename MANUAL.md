@@ -37,6 +37,16 @@
 
 ### 방법 A: 자동 설치 스크립트 (권장)
 
+**PC 리셋 후 복구 순서:**
+
+1. Google Drive(jiyoungjung1@gmail.com)에서 `SHORTS_SETUP.ps1` 다운로드
+   - Google Drive → 내 드라이브 → `SHORTS_SETUP.ps1` 검색
+   - 참고 문서: `SHORTS 파이프라인 — API 키 보관함` (API 키 전체 포함)
+
+2. 다운로드한 파일을 Desktop에 저장
+
+3. PowerShell 관리자 권한으로 실행:
+
 ```powershell
 # 1. PowerShell을 관리자 권한으로 실행
 # 2. 실행 정책 허용
@@ -48,9 +58,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 스크립트가 자동으로:
 - Node.js, ffmpeg, Git 설치 (winget)
-- GitHub 저장소 클론
+- GitHub 저장소 클론 (https://github.com/jiyoungjung11/shorts)
 - npm 패키지 설치
-- `.env` 파일 생성
+- `.env` 파일 생성 (API 키 포함)
 - Google SA 키 파일 생성
 
 ### 방법 B: 수동 설치
