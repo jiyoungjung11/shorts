@@ -26,6 +26,11 @@ Image prompt rules:
 - End with: "--no cartoon anime blurry watermark"
 - NO ocean, sea, or open horizon unless the topic is explicitly coastal
 
+Photo search query rules:
+- photo_search_query: short English keyword phrase (3-6 words) for finding a REAL photo on Wikimedia Commons
+- Be specific: include place name + landmark + angle/time (e.g. "Suwon Hwaseong fortress aerial view", "Gyeongbokgung palace night")
+- Avoid abstract descriptions; use concrete nouns a photographer would search for
+
 Motion rules:
 - Camera operator instruction style in English
 - Movements: slow zoom, lateral pan, tilt up/down, dolly in, wide reveal
@@ -52,6 +57,7 @@ JSON format:
       "scene_description": "Scene description in Korean",
       "narration": "English narration in licensed tour guide voice",
       "title_overlay": { "main": "HOOK TITLE", "sub": "Specific insider subtitle" },
+      "photo_search_query": "specific English photo search term for Wikimedia Commons",
       "image_prompt": "cinematic documentary photography, 4K quality, National Geographic aesthetic, ...",
       "motion": "Camera motion instruction in English"
     }

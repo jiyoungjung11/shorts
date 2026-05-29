@@ -122,7 +122,7 @@ async function main() {
 
   // 2. 이미지
   if (shouldRun("images")) {
-    console.log("[2/5] 이미지 생성 중 (Vertex AI Imagen 3)...");
+    console.log("[2/5] 실사 사진 검색 + AI 보정 중 (Wikimedia → Imagen)...");
     await generateImages(filteredScenario, imagesDir);
     await waitForImageReview(imagesDir);
   } else {
