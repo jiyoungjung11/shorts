@@ -199,11 +199,19 @@ export async function applyOverlays(scenario, imagesDir, overlayDir, textOverlay
   const total = cuts.length;
 
   const edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-  const browser = await puppeteer.launch({
+  const isWindows = process.platform === "win32";
+  const browserOpts = {
     headless: true,
-    executablePath: edgePath,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  };
+  if (isWindows) {
+    browserOpts.executablePath = edgePath;
+  } else {
+    // Linux: Puppeteer 내장 Chrome 사용
+    const { executablePath } = await import("puppeteer");
+    browserOpts.executablePath = executablePath();
+  }
+  const browser = await puppeteer.launch(browserOpts);
 
   try {
     for (const cut of cuts) {
